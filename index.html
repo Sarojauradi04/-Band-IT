@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Congratulations Champ | Band-It 10th Edition 2026 | Welcome to Mumbai</title>
+<style>
+  :root { color-scheme: dark; box-sizing: border-box; padding-top: env(safe-area-inset-top,0px); padding-bottom: env(safe-area-inset-bottom,0px); background:#0d0303; }
+  *,*::before,*::after { box-sizing: inherit; margin:0; padding:0; }
+  html,body { height:100%; }
+  html { scroll-padding-top: env(safe-area-inset-top,0px); }
+  body { background:#0d0303; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+
+  /* blurred copy fills any empty space around the poster */
+  .backdrop { position:fixed; inset:-40px; background:url('banner.png') center/cover no-repeat; filter:blur(28px) brightness(.35) saturate(1.2); transform:scale(1.1); z-index:0; }
+
+  /* poster keeps its exact 1366x768 ratio and is never cropped */
+  .poster {
+    position:relative; z-index:1;
+    width:min(100vw, 177.86vh);
+    aspect-ratio:1366/768;
+    overflow:hidden; isolation:isolate;
+    box-shadow:0 20px 60px rgba(0,0,0,.6);
+    animation: intro 1.4s cubic-bezier(.2,.8,.2,1) both;
+  }
+  .poster img { width:100%; height:100%; display:block; }
+  @keyframes intro { from { opacity:0; transform:scale(1.06); } to { opacity:1; transform:none; } }
+
+  .fx { position:absolute; inset:0; pointer-events:none; }
+
+  /* stage lamps flicker */
+  .lamp { position:absolute; width:4%; aspect-ratio:1; transform:translate(-50%,-50%); border-radius:50%;
+    background:radial-gradient(circle, rgba(255,210,150,.8) 0 10%, rgba(255,140,60,.35) 30%, transparent 65%);
+    mix-blend-mode:screen; animation: flicker 2.2s ease-in-out infinite; }
+  @keyframes flicker { 0%,100% { opacity:0; } 50% { opacity:.7; } }
+
+  /* badge glow pulse */
+  .badge-glow { position:absolute; left:50%; top:66.67%; width:24.16%; aspect-ratio:1; transform:translate(-50%,-50%);
+    border-radius:50%; background:radial-gradient(circle, transparent 55%, rgba(255,170,40,.4) 68%, transparent 78%);
+    mix-blend-mode:screen; animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity:.25; transform:translate(-50%,-50%) scale(.97); } 50% { opacity:.8; transform:translate(-50%,-50%) scale(1.03); } }
+
+  /* twinkles on stars and crown */
+  .spark { position:absolute; width:4.5%; aspect-ratio:1; transform:translate(-50%,-50%) scale(.3); mix-blend-mode:screen;
+    background:
+      linear-gradient(90deg, transparent 47%, #ffd98a 50%, transparent 53%),
+      linear-gradient(0deg, transparent 47%, #ffd98a 50%, transparent 53%),
+      radial-gradient(circle, rgba(255,240,200,1) 0 8%, rgba(255,200,80,.4) 25%, transparent 55%);
+    opacity:0; animation: twinkle 3s ease-in-out infinite; }
+  @keyframes twinkle { 0%,100% { opacity:0; transform:translate(-50%,-50%) scale(.3) rotate(0); } 50% { opacity:1; transform:translate(-50%,-50%) scale(1) rotate(45deg); } }
+
+  /* confetti */
+  .confetti { position:fixed; inset:0; pointer-events:none; z-index:2; overflow:hidden; }
+  .confetti i { position:absolute; top:-5%; border-radius:2px; animation: fall linear infinite; opacity:.95; }
+  @keyframes fall { to { transform:translate3d(var(--drift),112vh,0) rotate(var(--spin)); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .poster,.lamp,.badge-glow,.spark { animation:none; }
+    .lamp,.spark,.confetti { display:none; }
+  }
+</style>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"></div>
+  <main class="poster">
+    <img src="banner.png" alt="Congratulations Champ! Band-It 10th Edition 2026. Welcome to Mumbai. Global Schools Group and Furtados School of Music, supported by Furtados." width="1366" height="768">
+    <div class="fx" aria-hidden="true">
+      <span class="lamp" style="left:10.98%;top:0.78%;animation-delay:0.00s"></span><span class="lamp" style="left:28.18%;top:0.78%;animation-delay:0.37s"></span><span class="lamp" style="left:39.53%;top:0.78%;animation-delay:0.74s"></span><span class="lamp" style="left:49.19%;top:0.78%;animation-delay:1.11s"></span><span class="lamp" style="left:59.30%;top:0.78%;animation-delay:1.48s"></span><span class="lamp" style="left:73.21%;top:0.78%;animation-delay:1.85s"></span><span class="lamp" style="left:83.09%;top:0.78%;animation-delay:0.22s"></span><span class="lamp" style="left:90.41%;top:0.78%;animation-delay:0.59s"></span><span class="lamp" style="left:95.17%;top:0.78%;animation-delay:0.96s"></span>
+      <div class="badge-glow"></div>
+      <span class="spark" style="left:25.77%;top:42.45%;animation-delay:0.0s"></span><span class="spark" style="left:75.40%;top:42.45%;animation-delay:0.6s"></span><span class="spark" style="left:50.00%;top:11.98%;animation-delay:1.2s"></span><span class="spark" style="left:47.22%;top:10.16%;animation-delay:1.8s"></span><span class="spark" style="left:52.86%;top:10.16%;animation-delay:2.4s"></span>
+    </div>
+  </main>
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+<script>
+(function () {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var box = document.getElementById('confetti');
+  var colors = ['#f6cf6a','#e0a93a','#d99a2b','#ff4a3d','#d1121b','#b8860b'];
+  var count = window.innerWidth < 640 ? 30 : 60;
+  for (var i = 0; i < count; i++) {
+    var p = document.createElement('i'), w = 6 + Math.random() * 8;
+    p.style.left = (Math.random() * 100) + '%';
+    p.style.width = w + 'px';
+    p.style.height = (w * (1.3 + Math.random())) + 'px';
+    p.style.background = colors[i % colors.length];
+    p.style.animationDuration = (6 + Math.random() * 7) + 's';
+    p.style.animationDelay = (-Math.random() * 12) + 's';
+    p.style.setProperty('--drift', (Math.random() * 200 - 100) + 'px');
+    p.style.setProperty('--spin', (Math.random() * 1080 - 540) + 'deg');
+    box.appendChild(p);
+  }
+})();
+</script>
+</body>
+</html>
